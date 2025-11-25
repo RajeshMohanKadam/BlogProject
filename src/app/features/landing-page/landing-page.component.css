@@ -1,0 +1,54 @@
+body {
+  background-color: #f8f5ef;
+  font-family: Georgia, serif;
+}
+
+.navbar-brand {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.hero-title {
+  font-size: 6rem;
+  font-weight: bold;
+  line-height: 0.9;
+}
+
+.hero-subtext {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: -20px;
+}
+
+.start-btn {
+  background-color: black;
+  color: white;
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+}
+
+.graphic-box {
+  background-color: #37b34a;
+  width: 380px;
+  height: 320px;
+  position: relative;
+}
+
+.hand-img {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  width: 85%;
+  opacity: 0.9;
+}
+
+.flower {
+  width: 260px;
+  margin-left: 120px;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
