@@ -8,6 +8,13 @@ export const routes: Routes = [
         (m) => m.BlogListComponent
       ),
   },
+  {
+    path: 'new-story',
+    loadComponent: () =>
+      import('./add-blog/add-blog.component').then(
+        (m) => m.AddBlogComponent
+      ),
+  }
   // {
   //   path: ':id',
   //   loadComponent: () =>

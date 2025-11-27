@@ -4,3 +4,62 @@
   top: 50% !important;
   transform: translateY(-50%) !important;
 }
+
+input:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Put this in src/styles.css (global) */
+
+/* outer wrapper: fixed height editor box */
+.editor-wrapper {
+  height: 320px; /* set desired editor height */
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ensure the quill element fills the wrapper */
+.editor-wrapper quill-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* toolbar: stays at top, not scrollable */
+.editor-wrapper .ql-toolbar {
+  flex: 0 0 auto;
+  position: relative; /* keep it in flow */
+  z-index: 2;
+  border-radius: 8px 8px 0 0;
+  background: #fff; /* optional - makes toolbar visually separate */
+}
+
+/* container should take remaining space and be scrollable */
+.editor-wrapper .ql-container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  height: auto !important; /* override quill inline height */
+  overflow: hidden; /* hide overflow at container level; scroll on inner editor */
+}
+
+/* make the editing area scrollable (inside container) */
+.editor-wrapper .ql-editor {
+  padding: 16px;
+  box-sizing: border-box;
+  overflow-y: auto; /* THIS is the scrolling area */
+  flex: 1 1 auto;
+  min-height: 0; /* allow it to shrink inside flex container */
+}
+
+/* small niceties */
+.editor-wrapper .ql-editor img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

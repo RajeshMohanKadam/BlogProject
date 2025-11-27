@@ -1,0 +1,67 @@
+/* main heading */
+.headline {
+  font-size: 1.7rem;
+  /* font-weight: 800; */
+  margin-bottom: 6px;
+  color: #0f172a;
+  /* letter-spacing: -0.03em; */
+}
+
+/* underline animation */
+.headline::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 55px;
+  margin-top: 6px;
+  border-radius: 4px;
+  /* background: linear-gradient(90deg, #6b21a8, #06b6d4); */
+  background: linear-gradient(90deg, #020202, #c5c6c6);
+}
+
+/* subtitle */
+.lead {
+  margin: 0;
+  color: #2e343c;
+  font-size: 0.98rem;
+  font-weight: 300;
+  font-style: italic !important;
+}
+
+/* chips (category filters) */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.chip {
+  background: #f1f5f9;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.chip:hover {
+  transform: translateY(-2px);
+}
+
+.chip.active {
+  background: linear-gradient(90deg, #6b21a8, #06b6d4);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(11, 12, 30, 0.08);
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .headline {
+    font-size: 1.4rem;
+  }
+  .lead {
+    font-size: 0.85rem;
+  }
+}

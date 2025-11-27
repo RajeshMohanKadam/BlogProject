@@ -1,1 +1,20 @@
-<p>blog-list works!</p>
+<div class="my-3">
+  <h2 class="display-6 headline">Stories That Matter</h2>
+  <p class="lead">Short reads. Fresh perspectives.</p>
+</div>
+
+<div class="row">
+  <div class="col-8">
+    <app-article-card
+      *ngFor="let b of blogs"
+      [authorName]="b.authorName"
+      [title]="b.title"
+      [content]="b.content"
+      [date]="b.createdAt"
+      [views]="b.views"
+      [comments]="b.commentCount"
+      [imageUrl]="b.featuredImageUrl"
+    >
+    </app-article-card>
+  </div>
+</div>

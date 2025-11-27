@@ -1,0 +1,73 @@
+.article-card {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.article-card:hover {
+  background: #fafafa;
+}
+
+.card-body {
+  padding: 1.25rem 1.5rem;
+}
+
+.author-row {
+  gap: 0.6rem;
+}
+.author-avatar {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+}
+.author-name {
+  font-weight: 600;
+}
+
+.title {
+  font-size: 1.375rem;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-size: 0.95rem;
+  margin-bottom: 0.85rem;
+}
+
+.footer-row small {
+  font-size: 0.85rem;
+}
+
+.actions i {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.article-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 767.98px) {
+  .row.g-0 {
+    flex-direction: column-reverse;
+  }
+  .article-image {
+    height: 180px;
+    margin: 0.75rem 1rem;
+  }
+  .card-body {
+    padding: 1rem;
+  }
+  .title {
+    font-size: 1.1rem;
+  }
+}
+
+.custom-border {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid #eee !important;
+}

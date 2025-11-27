@@ -52,6 +52,10 @@
         />
       </div>
 
+      <div class="text-danger" *ngIf="password.invalid && password.touched">
+        <span *ngIf="password.errors?.['required']">Password is required</span>
+      </div>
+
       <button class="btn modern-btn w-100 mt-2">Sign In</button>
 
       <p class="text-center mt-3 switch-text">

@@ -1,0 +1,40 @@
+<div class="card article-card custom-border">
+  <div class="row g-0 align-items-center">
+    <div class="col-md-8">
+      <div class="card-body">
+        <div class="d-flex align-items-center mb-2 author-row">
+          <img
+            [src]="authorAvatarUrl"
+            alt="author"
+            class="rounded-circle author-avatar"
+          />
+          <span class="author-name">{{ authorName }}</span>
+        </div>
+
+        <h5 class="card-title title">{{ title }}</h5>
+
+        <p class="card-text subtitle text-muted">{{ subtitle }}</p>
+
+        <div class="d-flex align-items-center footer-row text-muted">
+          <small class="me-3">{{ date | date : "medium" }}</small>
+          <small class="me-3"><i class="bi bi-eye"></i> {{ views }}</small>
+          <small class="me-3"><i class="bi bi-chat"></i> {{ comments }}</small>
+
+          <!-- <div class="ms-auto d-flex align-items-center gap-3 actions">
+            <i class="bi bi-dash-circle"></i>
+            <i class="bi bi-bookmark"></i>
+            <i class="bi bi-three-dots"></i>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 d-flex align-items-center">
+      <img
+        [src]="imageUrl"
+        alt="article image"
+        class="img-fluid article-image"
+      />
+    </div>
+  </div>
+</div>

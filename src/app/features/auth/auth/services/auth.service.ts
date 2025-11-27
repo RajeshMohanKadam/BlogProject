@@ -20,13 +20,20 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/auth/register`, data);
   }
 
-  saveToken(token: string) {
-    localStorage.setItem('auth_token', token)
+  saveToken(tokenObj: any) {
+    localStorage.setItem('auth_token', tokenObj);
   }
 
+
   getToken(): string | null {
-    return localStorage.getItem('auth_token')
+    const data = localStorage.getItem('auth_token');
+    if (!data) return null;
+    const obj = JSON.parse(data);
+    console.log('Token - ', obj.token);
+
+    return obj.token
   }
+
 
   // Check login status
   isLoggedIn(): boolean {

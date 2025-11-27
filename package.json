@@ -20,6 +20,8 @@
     "@angular/router": "^19.1.0",
     "bootstrap": "^5.3.8",
     "ngx-bootstrap": "^20.0.2",
+    "ngx-quill": "^29.2.0",
+    "quill": "^2.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
