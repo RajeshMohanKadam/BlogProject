@@ -1,0 +1,36 @@
+<div class="blog-container">
+  <!-- BLOG TITLE -->
+  <h1 class="blog-title">{{ blog?.title }}</h1>
+
+  <!-- AUTHOR SECTION -->
+  <div class="author-section">
+    <img [src]="blog?.authorAvatarUrl" class="author-img" alt="Author" />
+
+    <div>
+      <div class="author-name">{{ blog?.authorName }}</div>
+      <div class="blog-date">
+        {{ blog?.createdAt | date : "MMMM d, y" }}
+      </div>
+    </div>
+
+    <!-- Edit icon on extreme right -->
+    <div class="actions" *ngIf="blog?.canEdit == 1">
+      <div class="edit-badge" (click)="goToEdit(blog.id)">
+        <i class="bi bi-pencil"></i>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- FEATURED IMAGE -->
+  <img
+    *ngIf="blog?.featuredImageUrl"
+    [src]="blog?.featuredImageUrl"
+    class="featured-image"
+    alt="Blog Image"
+  />
+
+  <!-- BLOG CONTENT -->
+  <div class="blog-content" [innerHTML]="blog?.content"></div>
+</div>

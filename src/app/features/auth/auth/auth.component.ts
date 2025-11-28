@@ -45,27 +45,52 @@ export class AuthComponent {
     this.isSignUp = false;
   }
 
-  submitForm(form: any, modal: any) {
-    if (form.invalid) {
-      form.control.markAllAsTouched(); // Show all error messages
-      return;
-    }
-    else if (this.isSignIn) {
-      this.authervice.login(form.value).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.close();
-          this.authervice.saveToken(JSON.stringify(res))
-          this.router.navigateByUrl('blogs');
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      })
-    }
-    else {
-      this.isSignIn = true;
-      this.isSignUp = false;
-    }
+  // login(form: any, type: any,) {
+  //   if (form.invalid) {
+  //     form.control.markAllAsTouched(); // Show all error messages
+  //     return;
+  //   }
+  //   else if (this.isSignIn) {
+  //     this.authervice.login(form.value).subscribe({
+  //       next: (res) => {
+  //         console.log(res);
+  //         if (type == "signin") { this.close(); }
+  //         this.authervice.saveToken(JSON.stringify(res))
+  //         this.router.navigateByUrl('blogs');
+  //       },
+  //       error: (err) => {
+  //         console.log(err);
+  //       }
+  //     })
+  //   }
+  //   else {
+  //     this.isSignIn = true;
+  //     this.isSignUp = false;
+  //   }
+  // }
+
+  login(form: any) {
+    this.authervice.login(form.value).subscribe({
+      next: (res) => {
+        this.authervice.saveToken(JSON.stringify(res))
+        this.close();
+        this.router.navigateByUrl('blogs');
+      },
+      error(err) {
+        console.log(err);
+      },
+    })
+  }
+
+  register(form: any) {
+    this.authervice.register(form.value).subscribe({
+      next: (res) => {
+        this.isSignIn = true;
+        this.isSignUp = false;
+      },
+      error(err) {
+        console.log(err);
+      }
+    })
   }
 }

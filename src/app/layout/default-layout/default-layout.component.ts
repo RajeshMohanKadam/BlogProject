@@ -2,6 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { count, filter } from 'rxjs/operators';
+import { AuthService } from '../../features/auth/auth/services/auth.service';
 
 @Component({
   selector: 'app-default-layout',
@@ -11,7 +12,10 @@ import { count, filter } from 'rxjs/operators';
 })
 export class DefaultLayoutComponent {
 
+  private authService = inject(AuthService);
   private navCounter = signal(0);
+  private data!: any | null;
+  name: any
 
   showDefaultNavbar = computed(() => {
     // read signal to make computed re-evaluate when updated
@@ -23,6 +27,11 @@ export class DefaultLayoutComponent {
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
       this.navCounter.update(counter => counter + 1)
     })
+
+    this.data = localStorage.getItem('auth_token');
+    this.data = JSON.parse(this.data);
+    this.name = this.data?.name.split(' ')[0]
+
   }
 
   goToAddBlog() {
@@ -31,5 +40,17 @@ export class DefaultLayoutComponent {
 
   goBack() {
 
+  }
+
+  menuOpen = false;
+
+  toggleMenu() {
+    debugger
+    this.menuOpen = !this.menuOpen;
+  }
+
+  logout() {
+    // your logout code here
+    console.log("Logged out");
   }
 }

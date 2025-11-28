@@ -14,6 +14,7 @@
       [views]="b.views"
       [comments]="b.commentCount"
       [imageUrl]="b.featuredImageUrl"
+      (click)="getBlog(b.id)"
     >
     </app-article-card>
   </div>

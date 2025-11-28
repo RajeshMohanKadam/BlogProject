@@ -1,1 +1,99 @@
-<p>edit-blog works!</p>
+<div class="container mt-4">
+  <h2 class="mb-4 display-6">Update Blog</h2>
+
+  <!-- GRID LAYOUT -->
+  <div class="row">
+    <!-- LEFT SIDE — TITLE + CATEGORY + EDITOR -->
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-8">
+          <div class="mb-3">
+            <!-- Title -->
+
+            <label class="form-label fw-semibold">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="title"
+              placeholder="Enter blog title..."
+            />
+          </div>
+        </div>
+        <div class="col-4">
+          <!-- Category -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Category</label>
+            <select class="form-select" [(ngModel)]="categoryId">
+              <option value="">Select category</option>
+              <option value="1">Arts</option>
+              <option value="2">Science</option>
+              <option value="3">Technology</option>
+              <option value="4">Cinema</option>
+              <option value="5">Design</option>
+              <option value="6">Food</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quill Editor -->
+
+      <div class="editor-wrapper">
+        <quill-editor
+          #editorRef
+          [(ngModel)]="editorContent"
+          [modules]="modules"
+          (onEditorCreated)="quill = $event"
+          format="html"
+          theme="snow"
+        ></quill-editor>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE — FEATURED IMAGE UPLOAD + PREVIEW -->
+    <div class="col-md-4">
+      <div class="image-card">
+        <label class="form-label fw-semibold mb-2">Featured Image</label>
+
+        <!-- Image Preview Box -->
+        <div class="preview-box" *ngIf="previewUrl; else placeholderBox">
+          <img [src]="previewUrl" class="preview-img" />
+        </div>
+
+        <!-- Placeholder Box -->
+        <ng-template #placeholderBox>
+          <div class="placeholder-box">
+            <p class="text-muted">No image selected</p>
+          </div>
+        </ng-template>
+
+        <!-- Upload Button -->
+        <input
+          type="file"
+          class="form-control mt-3"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+        />
+
+        <button
+          class="btn btn-danger mt-3 w-100"
+          *ngIf="previewUrl"
+          (click)="removeFeaturedImage()"
+        >
+          Remove Image
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="mt-4">
+    <button class="btn btn-dark me-3" (click)="updateBlog('published')">
+      <!-- <i class="bi bi-send"></i> -->
+      Update
+    </button>
+    <!-- <button class="btn btn-outline-dark" (click)="submitBlog('draft')">
+      Save as Draft
+    </button> -->
+  </div>
+</div>

@@ -19,12 +19,13 @@
 
     <div class="right-section">
       <button class="write-btn" (click)="goToAddBlog()">
-        <i class="bi bi-pencil-square"></i>
-        Write
+        <i class="bi bi-pencil-square"></i> Write
       </button>
-      <!-- <i class="bell"></i> -->
 
-      <!-- <img class="profile" src="/assets/profile.jpg" /> -->
+      <div class="user-badge">
+        <div class="avatar">{{ name?.charAt(0) }}</div>
+        <span class="username">{{ name }}</span>
+      </div>
     </div>
   </nav>
 

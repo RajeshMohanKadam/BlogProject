@@ -24,20 +24,19 @@ export class AuthService {
     localStorage.setItem('auth_token', tokenObj);
   }
 
-
   getToken(): string | null {
     const data = localStorage.getItem('auth_token');
     if (!data) return null;
     const obj = JSON.parse(data);
-    console.log('Token - ', obj.token);
-
     return obj.token
   }
-
 
   // Check login status
   isLoggedIn(): boolean {
     return !!localStorage.getItem('auth_token');
   }
 
+  logout() {
+    localStorage.removeItem('auth_token');
+  }
 }

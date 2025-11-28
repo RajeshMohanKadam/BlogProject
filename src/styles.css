@@ -1,65 +1,142 @@
-/* You can add global styles to this file, and also import other style files */
+/* ================================
+   GLOBAL STYLE FIXES
+================================ */
+
+/* Center Bootstrap modal vertically */
 .modal-dialog {
   margin: auto !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
 }
 
+/* Remove default focus ring from inputs/selects */
 input:focus,
 select:focus {
   outline: none !important;
   box-shadow: none !important;
 }
 
-/* Put this in src/styles.css (global) */
+/* ==========================================
+   QUILL EDITOR WRAPPER (fixed height editor)
+=========================================== */
 
-/* outer wrapper: fixed height editor box */
 .editor-wrapper {
-  height: 320px; /* set desired editor height */
+  height: 320px;
   border: 1px solid #e6e6e6;
   border-radius: 8px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background: #fff;
 }
 
-/* ensure the quill element fills the wrapper */
+/* Make quill editor fill wrapper */
 .editor-wrapper quill-editor {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-/* toolbar: stays at top, not scrollable */
+/* Toolbar stays fixed */
 .editor-wrapper .ql-toolbar {
   flex: 0 0 auto;
-  position: relative; /* keep it in flow */
+  position: relative;
   z-index: 2;
+  background: #fff;
   border-radius: 8px 8px 0 0;
-  background: #fff; /* optional - makes toolbar visually separate */
 }
 
-/* container should take remaining space and be scrollable */
+/* Container takes the remaining height */
 .editor-wrapper .ql-container {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  height: auto !important; /* override quill inline height */
-  overflow: hidden; /* hide overflow at container level; scroll on inner editor */
+  height: auto !important;
+  overflow: hidden;
 }
 
-/* make the editing area scrollable (inside container) */
+/* Actual editable area scrolls */
 .editor-wrapper .ql-editor {
-  padding: 16px;
-  box-sizing: border-box;
-  overflow-y: auto; /* THIS is the scrolling area */
   flex: 1 1 auto;
-  min-height: 0; /* allow it to shrink inside flex container */
+  padding: 16px;
+  min-height: 0;
+  box-sizing: border-box;
+  overflow-y: auto;
+  line-height: 1.6;
 }
 
-/* small niceties */
+/* Images inside the editor */
 .editor-wrapper .ql-editor img {
   max-width: 100%;
   height: auto;
+  display: block;
+}
+
+/* Center-aligned images */
+.ql-align-center img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* ================================
+   BLOG CONTENT VIEW STYLING
+================================ */
+
+/* Ensure content never overflows */
+.blog-content * {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Reset margins for consistent spacing */
+.blog-content p,
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6,
+.blog-content ul,
+.blog-content ol,
+.blog-content li {
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+
+/* Heading size fix */
+.blog-content h3 {
+  font-size: 1.5rem;
+  margin: 1.2em 0 0.6em 0 !important;
+}
+
+/* List spacing */
+.blog-content ul,
+.blog-content ol {
+  padding-left: 20px;
+  margin-bottom: 1.2em !important;
+}
+
+/* Paragraph spacing */
+.blog-content p {
+  line-height: 1.6;
+}
+
+/* Remove consecutive empty paragraphs */
+.blog-content p:empty::before {
+  content: "\A";
+  white-space: pre;
+}
+.blog-content p:empty + p:empty {
+  display: none;
+}
+
+/* Images inside blog */
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 25px 0;
   display: block;
 }

@@ -1,0 +1,111 @@
+.blog-container {
+  max-width: 750px !important;
+  margin: 60px auto;
+  padding: 0 20px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.blog-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 25px;
+  color: #242424;
+  font-family: "Work Sans", sans-serif;
+}
+
+/* ----------------------------------
+   AUTHOR SECTION
+---------------------------------- */
+.author-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+  gap: 14px;
+}
+
+.author-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+/* Name + Date */
+.author-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.blog-date {
+  font-size: 0.9rem;
+  color: #6b6b6b;
+  margin-top: 2px;
+}
+
+/* Push actions to extreme right */
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* EDIT BADGE */
+.edit-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #eeeeee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.edit-badge:hover {
+  background: #e4e4e4;
+}
+
+.edit-badge i {
+  font-size: 16px;
+  color: #333;
+}
+
+/* ----------------------------------
+   DIVIDER
+---------------------------------- */
+.divider {
+  margin: 25px 0;
+  border: none;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* ----------------------------------
+   FEATURED IMAGE
+---------------------------------- */
+.featured-image {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 35px;
+}
+
+/* ----------------------------------
+   BLOG CONTENT
+---------------------------------- */
+.blog-content {
+  font-size: 1.2rem;
+  line-height: 1.75;
+  color: #242424;
+}
+
+.blog-content p + p {
+  margin-top: 1em;
+}
+
+.blog-content img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 25px 0;
+}

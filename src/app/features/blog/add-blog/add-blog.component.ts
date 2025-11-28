@@ -6,6 +6,7 @@ import { QuillModule } from 'ngx-quill'
 import { AuthService } from '../../auth/auth/services/auth.service';
 import { NgIf } from '@angular/common';
 import { BlogService } from '../services/blog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-blog',
@@ -19,6 +20,7 @@ export class AddBlogComponent {
   editorContent = '';
   authService = inject(AuthService)
   blogService = inject(BlogService)
+  router = inject(Router)
 
   @ViewChild('editorRef') editorRef: any;
   quill!: Quill;
@@ -122,6 +124,7 @@ export class AddBlogComponent {
     this.blogService.createBlog(formData).subscribe({
       next: (res) => {
         console.log(res);
+        this.router.navigateByUrl('blogs');
       },
       error: (err) => {
         console.log(err);

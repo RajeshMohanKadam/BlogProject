@@ -14,11 +14,7 @@
 
   <div class="modal-body">
     <!-- SIGN IN FORM -->
-    <form
-      *ngIf="isSignIn"
-      #signInForm="ngForm"
-      (ngSubmit)="submitForm(signInForm, modal)"
-    >
+    <form *ngIf="isSignIn" #signInForm="ngForm" (ngSubmit)="login(signInForm)">
       <div class="input-group mb-3 modern-input">
         <span class="input-group-text"><i class="bi bi-envelope"></i></span>
         <input
@@ -68,7 +64,7 @@
     <form
       *ngIf="isSignUp"
       #signupForm="ngForm"
-      (ngSubmit)="submitForm(signupForm, modal)"
+      (ngSubmit)="register(signupForm)"
     >
       <div class="input-group mb-3 modern-input">
         <span class="input-group-text"><i class="bi bi-person"></i></span>

@@ -19,4 +19,12 @@ export class BlogService {
     return this.http.get(`${this.baseUrl}/blogs/all`);
   }
 
+  getBlogById(id: number) {
+    return this.http.get(`${this.baseUrl}/blogs/${id}`)
+  }
+
+  updateBlog(id: number, data: any) {
+    return this.http.put(`${this.baseUrl}/blogs/${id}`, data)
+  }
+
 }

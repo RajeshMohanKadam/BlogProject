@@ -19,6 +19,7 @@ export class ArticleCardComponent {
   @Input() imageUrl!: string;
 
   get subtitle() {
-    return this.content?.replace(/<[^>]+>/g, '').slice(0, 160) + '...';
+    return this.content?.replace(/<[^>]+>/g, '').slice(0, 100) + ' ...';
   }
 }
+
