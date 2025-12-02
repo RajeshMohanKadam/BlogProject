@@ -41,7 +41,8 @@
       <div class="editor-wrapper">
         <quill-editor
           #editorRef
-          [(ngModel)]="editorContent"
+          [ngModel]="editorContent()"
+          (ngModelChange)="editorContent.set($event)"
           [modules]="modules"
           (onEditorCreated)="quill = $event"
           format="html"

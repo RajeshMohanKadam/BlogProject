@@ -27,4 +27,8 @@ export class BlogService {
     return this.http.put(`${this.baseUrl}/blogs/${id}`, data)
   }
 
+  deleteInlineImage(id: any) {
+    return this.http.post(`${this.baseUrl}/blogs/delete-image`, { imageId: id }
+    );
+  }
 }

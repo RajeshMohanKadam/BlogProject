@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, effect, inject, signal, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import Quill from 'quill';
@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 export class AddBlogComponent {
   title = '';
   categoryId = '';
-  editorContent = '';
+  editorContent = signal(''); // SIGNAL tracking editor content
   authService = inject(AuthService)
   blogService = inject(BlogService)
   router = inject(Router)
@@ -55,15 +55,27 @@ export class AddBlogComponent {
     }
   };
 
-  constructor(private http: HttpClient) { }
+  private lastHtml = '';
+
+  constructor(private http: HttpClient) {
+
+    effect(() => {
+      debugger
+      const currentHtml = this.editorContent();
+      if (this.lastHtml) {
+        this.detectDeletedImages(currentHtml);
+      }
+      this.lastHtml = currentHtml;
+    });
+  }
 
   ngAfterViewInit() {
     this.quill = this.editorRef.quillEditor;
+
   }
 
   // Image Upload Logic
   handleImageUpload() {
-    debugger
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -89,24 +101,61 @@ export class AddBlogComponent {
 
       this.quill.clipboard.dangerouslyPasteHTML(
         range.index,
-        `<img src="${imgUrl}" data-public-id="${publicId}" class="mx-auto"/>`
+        `<img src="${imgUrl}" class="mx-auto"/>`
       );
+
+      // Update signal manually after image insert
+      this.editorContent.set(this.quill.root.innerHTML);
+      this.lastHtml = this.editorContent();
     };
   }
 
-  // Helper to extract image IDs
-  // extractImagePublicIds(html: string): string[] {
-  //   const temp = document.createElement('div');
-  //   temp.innerHTML = html;
 
-  //   return Array.from(temp.querySelectorAll('img'))
-  //     .map(img => img.getAttribute('data-public-id')!)
-  //     .filter(id => id);
-  // }
+  detectDeletedImages(currentHtml: string) {
+
+    const prevImgs = this.extractImgUrls(this.lastHtml);
+    const currImgs = this.extractImgUrls(currentHtml);
+
+    const deleted = prevImgs.filter(src => !currImgs.includes(src));
+    deleted.forEach(url => {
+      const publicId = this.extractImagePublicId(url);
+      if (publicId) {
+        this.blogService.deleteInlineImage(publicId).subscribe({
+          next: (res) => {
+            debugger
+            console.log('Deleted inline image:', res)
+          },
+          error: (err) => {
+            debugger
+            console.log('Error deleting inline image:', err)
+          }
+        });
+      }
+    });
+
+
+  }
+
+  extractImgUrls(html: string) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    return Array.from(div.querySelectorAll('img')).map(img => img.src);
+  }
+
+  extractImagePublicId(url: string) {
+    const versionIndex = url.indexOf('/v');
+    if (versionIndex === -1) return null;
+    const afterVersion = url.substring(versionIndex);
+    const parts = afterVersion.split('/');
+    parts.shift();
+    parts.shift();
+    const filename = parts.pop()!;
+    const nameWithoutExt = filename.split('.')[0];
+    return [...parts, nameWithoutExt].join('/');
+  }
 
   // Submit blog
   submitBlog(status: string) {
-    const contentHtml = this.quill.root.innerHTML;
     // const imageIds = this.extractImagePublicIds(contentHtml);
 
     const formData = new FormData()
@@ -114,7 +163,7 @@ export class AddBlogComponent {
     formData.append('title', this.title)
     formData.append('categoryId', this.categoryId)
     formData.append('status', status)
-    formData.append('content', contentHtml)
+    formData.append('content', this.cleanHtml(this.editorContent()))
 
     // Add featured image ONLY if user selected one
     if (this.selectedFile) {
@@ -152,5 +201,13 @@ export class AddBlogComponent {
   removeFeaturedImage() {
     this.previewUrl = null;
     this.selectedFile = null;
+  }
+
+  cleanHtml(html: string): string {
+    return html
+      .replace(/(&nbsp;)+/g, ' ')
+      .replace(/<p><br><\/p>/g, '') // remove empty line blocks
+      .replace(/\s+/g, ' ')
+      .trim();
   }
 }
